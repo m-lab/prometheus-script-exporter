@@ -1,0 +1,10 @@
+FROM golang:1.13-stretch
+
+# Install script_exporter and dependencies.
+RUN go get github.com/m-lab/script_exporter
+RUN go get github.com/m-lab/ndt5-client-go/cmd/ndt5-client
+RUN go get github.com/m-lab/locate/cmd/monitoring-token
+COPY ./cache_exit_code.sh /usr/bin/
+
+EXPOSE 9172
+ENTRYPOINT ["/go/bin/script_exporter"]
